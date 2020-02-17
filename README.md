@@ -20,4 +20,4 @@ This mod includes:
 -Ability to refuel with a jerry can
 
 
-This mod is dependent on the ScriptHookVDotNet API V3.
+This mod is dependent on the [ScriptHookVDotNet](https://github.com/crosire/scripthookvdotnet) API.
