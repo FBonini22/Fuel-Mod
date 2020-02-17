@@ -110,11 +110,11 @@ namespace Fuel1._1a
                 }
 
 
-                //UI.Notify("MPG with speed adjust is: " + adjustedMPG.ToString());
+                //GTA.UI.Notification.Show("MPG with speed adjust is: " + adjustedMPG.ToString());
 
                 //RPM factor
                 adjustedMPG /= ((0.75f + (float)Math.Pow(vInstance.CurrentRPM, 2d)) * 0.75f);
-                //UI.Notify("MPG with RPM adjust is: " + adjustedMPG.ToString());
+                //GTA.UI.Notification.Show("MPG with RPM adjust is: " + adjustedMPG.ToString());
 
 
                 if (vInstance.Acceleration <= 0)
@@ -138,13 +138,13 @@ namespace Fuel1._1a
 
                 distanceT += distTraveled;
 
-                //UI.Notify("Distance traveled: " + distTraveled.ToString() + "\nFuel consumed: " + fuelConsumed.ToString()
+                //GTA.UI.Notification.Show("Distance traveled: " + distTraveled.ToString() + "\nFuel consumed: " + fuelConsumed.ToString()
                 //    + "\nCurrent fuel level is: " + fuel.ToString());
 
 
                 //vInstance.FuelLevel = fuel;
 
-                //UI.Notify("Fuel after consumption is: " + vInstance.FuelLevel.ToString());
+                //GTA.UI.Notification.Show("Fuel after consumption is: " + vInstance.FuelLevel.ToString());
                 currentMPG = adjustedMPG;
 
                 CalculateAverageFuelConsumption(currentMPG);
@@ -188,31 +188,31 @@ namespace Fuel1._1a
             //"obj" is new
 
             Vehicle toCompare = (obj as GasVehicle).GetVehicleInstance();
-            //UI.Notify("Inside custom .equals method..");
-            //UI.Notify("new vehic: " + toCompare.GetHashCode().ToString() + "\nold Vehic: " + vInstance.GetHashCode().ToString());
+            //GTA.UI.Notification.Show("Inside custom .equals method..");
+            //GTA.UI.Notification.Show("new vehic: " + toCompare.GetHashCode().ToString() + "\nold Vehic: " + vInstance.GetHashCode().ToString());
 
             int points = 0;
 
             if(vHash == toCompare.GetHashCode())
             {
                 //points += 2;
-                //UI.Notify("Hashes match");
+                //GTA.UI.Notification.Show("Hashes match");
                 return true;
             }
             if(vColor == toCompare.PrimaryColor)
             {
                 points += 1;
-                //UI.Notify("Colors match");
+                //GTA.UI.Notification.Show("Colors match");
             }
             if(vName == toCompare.DisplayName || vModelHash == toCompare.Model.Hash)
             {
                 points += 3;
             }
 
-            //UI.Notify
-            //UI.Notify(vInstance.DisplayName);
-            //UI.Notify(vInstance.FriendlyName);
-            //UI.Notify(vInstance.Model.Hash.ToString());
+            //GTA.UI.Notification.Show
+            //GTA.UI.Notification.Show(vInstance.DisplayName);
+            //GTA.UI.Notification.Show(vInstance.FriendlyName);
+            //GTA.UI.Notification.Show(vInstance.Model.Hash.ToString());
 
             return points >= 4;
         }
@@ -248,7 +248,8 @@ namespace Fuel1._1a
 
 
         /// <summary>
-        /// Equation for speed factor on fuel consumption
+        /// Equation for speed factor on fuel consumption. This was determined through an Excel polynomial fit
+        /// on a data set that fits the desired model.
         /// </summary>
         /// <param name="speed">The current speed at which the car is traveling in GTA speed units</param>
         /// <returns>Instantaneous fuel consumption in MPG</returns>
@@ -318,7 +319,7 @@ namespace Fuel1._1a
             }
             else if(vInstance.FuelLevel < fuel)
             {
-                UI.Notify("ERROR. See GasVehicle.cs CheckFuelLevel method");
+                GTA.UI.Notification.Show("ERROR. See GasVehicle.cs CheckFuelLevel method");
             }
         }
 

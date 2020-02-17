@@ -21,7 +21,7 @@ namespace Fuel1._1a
             corner1 = c1;
             corner2 = c2;
             center = CalculateCenter(c1, c2);
-            //UI.Notify("We are in the Location constructor...");
+            //GTA.UI.Notification.Show("We are in the Location constructor...");
         }
 
 

@@ -55,10 +55,12 @@ namespace Fuel1._1a
         private Ped p = Game.Player.Character;
 
         private GasStation currentStation = null;
-
+        /*
+         * These types are deprecated. Use the new equivalent from ScriptHookVDotNet3
         GTA.UIRectangle gaugeBackground;
         GTA.UIRectangle gauge;
-        UIText gaugeText;
+        */
+        GTA.UI.TextElement gaugeText;
 
         private int elapsedIntervalTime = 0;
         private int elapsedTimeSinceLastRefuel = 0;
@@ -97,7 +99,7 @@ namespace Fuel1._1a
                 if (p.IsInVehicle() && currentCar != null)
                 {
                     //currentCar = new GasVehicle(p.CurrentVehicle);
-                    UI.Notify(currentCar.GetFuelLevel().ToString() + "\n" +
+                    GTA.UI.Notification.Show(currentCar.GetFuelLevel().ToString() + "\n" +
                         currentCar.GetActualFuelLevel().ToString() + "\n" +
                         currentCar.GetCurrentFuelConsumption().ToString() + " MPG\n" +
                         currentCar.distanceT.ToString());
@@ -108,10 +110,10 @@ namespace Fuel1._1a
                 {
                     vehicleForRefuel.Refuel(FUEL.Jerry_Can);
 
-                    UI.Notify("Vehicle refueled!");
+                    GTA.UI.Notification.Show("Vehicle refueled!");
 
                     vehicleForRefuel = null;
-                    p.Weapons.Remove(GTA.Native.WeaponHash.PetrolCan);
+                    p.Weapons.Remove(GTA.WeaponHash.PetrolCan);
 
                     readyForCanRefuel = false;
                 }
@@ -131,7 +133,7 @@ namespace Fuel1._1a
                             ChargePlayer(refillPrice);
 
                             currentCar.Refuel(FUEL.Fuel_Pump);
-                            UI.Notify("Vehicle refueled!");
+                            GTA.UI.Notification.Show("Vehicle refueled!");
 
                             justRefueled = true;
                             elapsedTimeSinceLastRefuel = 0;
@@ -139,7 +141,7 @@ namespace Fuel1._1a
                         }
                         else
                         {
-                            UI.Notify("You don\'t have enough cash to refuel your vehicle! ");
+                            GTA.UI.Notification.Show("You don\'t have enough cash to refuel your vehicle! ");
                             //Add a random pity message
                         }
                     }
@@ -223,14 +225,14 @@ namespace Fuel1._1a
             {
                 vehicles += (v.GetVehicleInstance().ToString() + "\n");
             }
-            UI.Notify(vehicles);
+            GTA.UI.Notification.Show(vehicles);
 
             string vehicleHashes = "";
             foreach (var v in savedVehicles)
             {
                 vehicleHashes += (v.GetVehicleInstance().GetHashCode().ToString() + "\n");
             }
-            UI.Notify(vehicleHashes);
+            GTA.UI.Notification.Show(vehicleHashes);
         }
 
 
@@ -244,7 +246,7 @@ namespace Fuel1._1a
             //Previously was "!SavedVehicles.Contains(gV)"
             if (!savedVehicles.Contains(gV))
             {
-                UI.Notify("Adding gas vehicle to list...");
+                GTA.UI.Notification.Show("Adding gas vehicle to list...");
                 if(savedVehicles.Count >= MAX_SAVED_VEHICLES)
                 {
                     removeVehicle(0);
@@ -253,10 +255,10 @@ namespace Fuel1._1a
             }
             else
             {
-                UI.Notify("List of vehicles already contains this vehicle.");
+                GTA.UI.Notification.Show("List of vehicles already contains this vehicle.");
 
                 currentCar = savedVehicles.Find((GasVehicle gGV)=> { return gGV.Equals(gV); });
-                UI.Notify("Loaded vehicle from list. Current fuel level is: " + currentCar.GetFuelLevel());
+                GTA.UI.Notification.Show("Loaded vehicle from list. Current fuel level is: " + currentCar.GetFuelLevel());
             }
         }
         /// <summary>
@@ -298,7 +300,7 @@ namespace Fuel1._1a
             gauge = new UIRectangle(
                 Visuals.FUEL_BAR_COORDINATES, gaugeSize, Visuals.FUEL_BAR_COLOR);
 
-            gaugeText = new UIText((currentCar.GetFuelLevelPercent() * 100).ToString("F0") +
+            gaugeText = new GTA.UI.TextElement((currentCar.GetFuelLevelPercent() * 100).ToString("F0") +
                 "%\n Current MPG: " + currentCar.GetCurrentFuelConsumption().ToString("F2") + 
                 "\n Average MPG: " + currentCar.GetAverageFuelConsumption().ToString("F2") + 
                 "\n Acceleration: " + currentCar.GetVehicleInstance().Acceleration.ToString("F6"),
@@ -378,17 +380,17 @@ namespace Fuel1._1a
         {
             if(elapsedIntervalTime >= FUEL_CHECK_INTERVAL)
             {
-                //UI.Notify("Fuel check interval...");
+                //GTA.UI.Notification.Show("Fuel check interval...");
                 if (!p.IsInVehicle())
                 {
-                    //UI.Notify("Checking for player vicinity to vehicle");
+                    //GTA.UI.Notification.Show("Checking for player vicinity to vehicle");
 
                     //List<Vehicle> nearbyVehicles = new List<Vehicle>(World.GetNearbyVehicles(p,MIN_REFUEL_DISTANCE));
 
                     //vehicleForRefuel = savedVehicles.Find((GasVehicle gV) =>
                     //{ return p.Position.DistanceTo(gV.GetVehicleInstance().Position) <= MIN_REFUEL_DISTANCE; });
 
-//                    UI.Notify(vehicleForRefuel.GetFuelLevel().ToString());
+//                    GTA.UI.Notification.Show(vehicleForRefuel.GetFuelLevel().ToString());
 
                     if(vehicleForRefuel == null)
                     {
@@ -405,19 +407,19 @@ namespace Fuel1._1a
 
                     if (vehicleForRefuel != null && !inRangeForRefuel)
                     {
-                        //UI.Notify("In range for refuel!");
+                        //GTA.UI.Notification.Show("In range for refuel!");
                         inRangeForRefuel = true;
                     }
 
                     if (inRangeForRefuel)
                     {
                         WeaponHash currentWeapon = p.Weapons.Current.Hash;
-                        //UI.Notify("checking current wep");
+                        //GTA.UI.Notification.Show("checking current wep");
                         //If the user is holding a jerry can
                         if (currentWeapon == GTA.Native.WeaponHash.PetrolCan)
                         {
                             readyForCanRefuel = true;
-                            UI.Notify("Press Y to use the jerry can to refuel your vehicle.");
+                            GTA.UI.Notification.Show("Press Y to use the jerry can to refuel your vehicle.");
                         }
                         else
                         {
@@ -469,7 +471,7 @@ namespace Fuel1._1a
                 }
                 else if (refuelMenuEnabled && !justRefueled)
                 {
-                    UI.Notify("Press SpaceBar to refuel your vehicle. It will cost $" + refillPrice.ToString());
+                    GTA.UI.Notification.Show("Press SpaceBar to refuel your vehicle. It will cost $" + refillPrice.ToString());
                 }
 
                 if (!IsAtGasStation())
