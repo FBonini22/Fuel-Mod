@@ -348,3 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Fuel1.1a/Properties/Resources.Designer.cs
+/Fuel1.1a/Resources/FuelWarning.wav
+/Fuel1.1a/Properties/Resources.resx
+/Fuel1.1a/Fuel1.1a.csproj
+/Fuel1.1a.sln
+/Fuel1.1a/Properties/AssemblyInfo.cs
