@@ -24,7 +24,7 @@ namespace Fuel1._1a
         public static readonly int          FUEL_REFILL_COOLDOWN            = 5000;
         public static readonly int          REFRESH_INTERVAL                = 25;
         public static readonly int          MAX_SAVED_VEHICLES              = 10;
-        private static readonly float       FUEL_LEVEL_WARNING_THRESHOLD    = 0.16f;
+        private static readonly float       FUEL_LEVEL_WARNING_THRESHOLD    = 0.17f;
         private static readonly float       MIN_REFUEL_DISTANCE             = 10f;
 
         private static List<GasStation> STATIONS = new List<GasStation>()

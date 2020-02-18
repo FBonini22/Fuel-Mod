@@ -17,7 +17,7 @@ namespace Fuel1._1a
         private readonly float MILE_CONSTANT = 10f / 8f;
         private readonly float MIN_SPEED = 0.1f;
         private readonly float DEFAULT_FUEL_CAPACITY = 20f;
-        private readonly float ADJUSTMENT_CONSTANT = 14.5f;     //Previous value: 14.5
+        private readonly float ADJUSTMENT_CONSTANT = 12.5f;     //Previous value: 14.5
         private readonly float IDLE_RPM = 0.2f;                 //Default engine idle RPM
         private readonly float IDLE_CONSUMPTION = 0.5f;         //In gallons per hour
         private readonly float CITY_SPEED_CUTOFF = 21f;
