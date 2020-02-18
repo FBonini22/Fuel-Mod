@@ -55,11 +55,12 @@ namespace Fuel1._1a
         private Ped p = Game.Player.Character;
 
         private GasStation currentStation = null;
-        /*
-         * These types are deprecated. Use the new equivalent from ScriptHookVDotNet3
+
+         /* These types are deprecated. Use the new equivalent from ScriptHookVDotNet3
         GTA.UIRectangle gaugeBackground;
         GTA.UIRectangle gauge;
         */
+
         GTA.UI.TextElement gaugeText;
 
         private int elapsedIntervalTime = 0;
@@ -287,6 +288,8 @@ namespace Fuel1._1a
         /// </summary>
         private void DrawFuelGauge()
         {
+            //UI Rectangles no longer function correctly. Until these are fixed, rely on in-vehicle gauge and debugging text.
+            /*
             gaugeBackground = new UIRectangle(
                 Visuals.FUEL_BAR_COORDINATES,
                 Visuals.FUEL_BAR_SIZE,
@@ -307,11 +310,16 @@ namespace Fuel1._1a
                 new Point(Visuals.FUEL_BAR_COORDINATES.X, Visuals.FUEL_BAR_COORDINATES.Y - 120),
                                     0.5f, (lowFuelLevel) ? Visuals.FUEL_BAR_WARNING_COLOR : Color.White);
 
+            */
+            //gaugeBackground.Draw();
+            //gauge.Draw();
 
-
-
-            gaugeBackground.Draw();
-            gauge.Draw();
+            gaugeText = new GTA.UI.TextElement((currentCar.GetFuelLevelPercent() * 100).ToString("F0") +
+                            "%\n Current MPG: " + currentCar.GetCurrentFuelConsumption().ToString("F2") +
+                            "\n Average MPG: " + currentCar.GetAverageFuelConsumption().ToString("F2") +
+                            "\n Acceleration: " + currentCar.GetVehicleInstance().Acceleration.ToString("F6"),
+                            new Point(Visuals.FUEL_BAR_COORDINATES.X, Visuals.FUEL_BAR_COORDINATES.Y - 120),
+                                0.5f, (lowFuelLevel) ? Visuals.FUEL_BAR_WARNING_COLOR : Color.White);
             gaugeText.Draw();
         }
         /// <summary>
@@ -336,7 +344,7 @@ namespace Fuel1._1a
         }
         private void DrawDebugInfo()
         {
-            GTA.UIText spMPG = new UIText("Speed: " + currentCar.GetVehicleInstance().Speed.ToString() +
+            var spMPG = new GTA.UI.TextElement("Speed: " + currentCar.GetVehicleInstance().Speed.ToString() +
                                             "\nMPG: " + currentCar.GetCurrentFuelConsumption() +
                                             "\nFuel Level: " + currentCar.GetFuelLevel() + 
                                             "\nAverage MPG: " + currentCar.GetAverageFuelConsumption(), new Point(500, 500), 1f);
@@ -416,7 +424,7 @@ namespace Fuel1._1a
                         WeaponHash currentWeapon = p.Weapons.Current.Hash;
                         //GTA.UI.Notification.Show("checking current wep");
                         //If the user is holding a jerry can
-                        if (currentWeapon == GTA.Native.WeaponHash.PetrolCan)
+                        if (currentWeapon == GTA.WeaponHash.PetrolCan)
                         {
                             readyForCanRefuel = true;
                             GTA.UI.Notification.Show("Press Y to use the jerry can to refuel your vehicle.");

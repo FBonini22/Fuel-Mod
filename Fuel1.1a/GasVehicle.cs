@@ -63,7 +63,6 @@ namespace Fuel1._1a
             //Save vehicle attributes
             vModelHash = v.Model.Hash;
             vName = v.DisplayName;
-            vColor = v.PrimaryColor;
             vHash = v.GetHashCode();
             v.IsPersistent = true;
 
@@ -198,11 +197,6 @@ namespace Fuel1._1a
                 //points += 2;
                 //GTA.UI.Notification.Show("Hashes match");
                 return true;
-            }
-            if(vColor == toCompare.PrimaryColor)
-            {
-                points += 1;
-                //GTA.UI.Notification.Show("Colors match");
             }
             if(vName == toCompare.DisplayName || vModelHash == toCompare.Model.Hash)
             {
@@ -364,7 +358,7 @@ namespace Fuel1._1a
 
         public bool isIdling()
         {
-            return vInstance.Speed < 0.1 && vInstance.EngineRunning;
+            return vInstance.Speed < 0.1 && vInstance.IsEngineRunning;
         }
 
         public void dumpObject()
