@@ -55,16 +55,16 @@ namespace Fuel1._1a
         public GasVehicle(Vehicle v)
         {
             vInstance = v;
-            fuelCapacity = v.FuelLevel;
+            fuelCapacity = v.PetrolTankVolume;
             //fuelCapacity = DEFAULT_FUEL_CAPACITY;
-            fuel = fuelCapacity;
+            fuel = v.FuelLevel;
             MPG = 20f;
             
             //Save vehicle attributes
             vModelHash = v.Model.Hash;
             vName = v.DisplayName;
             vHash = v.GetHashCode();
-            v.IsPersistent = true;
+            //v.IsPersistent = true;
 
             //vInstance.FuelLevel = 0;
             //vInstance.FuelLevel = DEFAULT_FUEL_CAPACITY;
