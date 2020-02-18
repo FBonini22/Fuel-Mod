@@ -1,7 +1,7 @@
 # Fuel-Mod
-This is the code repository for a realistic fuel mod for GTA V. Cars come with fuel tanks as standard, and cars can lose that fuel if their tank is damaged. A car without fuel by default cannot be driven in GTA.
+This is the code repository for a realistic fuel mod for GTA V. In the game, cars come with fuel tanks as standard, but cars can lose that fuel if the tank is damaged. A car without fuel by default cannot be driven in GTA.
 
-Why not use the built-in fuel tank and model realistic fuel consumption for in-game vehicles?
+Why not use that built-in fuel tank and model realistic fuel consumption for in-game vehicles?
 
 This mod includes:
 
@@ -18,3 +18,6 @@ This mod includes:
     -Prices vary by gas station location
     
 -Ability to refuel with a jerry can
+
+
+This mod is dependent on the [ScriptHookVDotNet](https://github.com/crosire/scripthookvdotnet) API.
